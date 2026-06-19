@@ -579,13 +579,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .contact-item p {
     color: var(--text-muted);
-    word-break: break-all;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
-.contact-item > div {
-    min-width: 0; /* Allows text to wrap within flex container */
-    width: 100%;
+.contact-item > div:not(.contact-icon) {
+    min-width: 0; 
+    flex: 1;
 }
 
 /* Footer */
