@@ -122,3 +122,38 @@ window.addEventListener('resize', () => {
 
 // Set dynamic current year in footer
 document.getElementById('current-year').textContent = new Date().getFullYear();
+
+// --- Typewriter Animation for Hero Subtitle ---
+const words = ['Flutter Developer', 'Mobile Architect', 'Android & iOS Specialist', 'UI/UX Enthusiast'];
+const typewriterTarget = document.getElementById('typewriter-text');
+let wordIdx = 0;
+let charIdx = 0;
+let isDeleting = false;
+let typeDelay = 120;
+
+function typeWord() {
+    const currentWord = words[wordIdx];
+
+    if (isDeleting) {
+        typewriterTarget.textContent = currentWord.substring(0, charIdx - 1);
+        charIdx--;
+        typeDelay = 60;
+    } else {
+        typewriterTarget.textContent = currentWord.substring(0, charIdx + 1);
+        charIdx++;
+        typeDelay = 120;
+    }
+
+    if (!isDeleting && charIdx === currentWord.length) {
+        typeDelay = 2000; // Pause at full word
+        isDeleting = true;
+    } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        wordIdx = (wordIdx + 1) % words.length;
+        typeDelay = 400;
+    }
+
+    setTimeout(typeWord, typeDelay);
+}
+
+setTimeout(typeWord, 800);
